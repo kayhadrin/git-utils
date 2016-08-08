@@ -1,0 +1,52 @@
+[push]
+	default = current
+[credential]
+	helper = wincred # to remember the HTTPS user passwords on Windows
+[merge]
+	ff = false # to avoid merging branches silently and making it hard to trace afterwards
+[core]
+	longpaths = true # needed for node modules
+	autocrlf = true
+[color]
+	ui = auto
+[alias]
+	gl = log --graph --decorate --oneline
+	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold magenta)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold magenta)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg = !git lg2
+	show-root-folder = rev-parse --show-toplevel
+	one = log --pretty=oneline --abbrev-commit
+	history = !cd \"$GIT_PREFIX\" && gitk --simplify-merges
+	a = add
+	c = commit
+	ca = commit --amend
+	ci = commit -a
+	co = checkout
+	d = diff
+	dc = diff --changed
+	ds = diff --staged
+	f = fetch
+	s = status
+	fp = fetch -p
+	m = merge
+	pf = pull --ff
+
+	# shows and apply a git stash item by name
+	# @see http://stackoverflow.com/a/11688523/104598
+	# @reminder To save a named stash, use `git stash save "name"`
+	sshow = "!f() { echo Searching for stash named \\\"\"$*\"\\\"; git stash show stash^{/$*} -p; }; f"
+	sapply = "!f() { echo Applying latest stash named \\\"\"$*\"\\\"; git stash apply stash^{/$*}; }; f"
+
+	# Similar to force pushing, but works by deleting and re-pushing a remote branch
+	# Useful for Stash when we're not allowed to force push directly...
+	replace-branch = "!f() { branch=\"$1\"; echo Replacing remote branch \\\"$branch\\\"; git push origin --delete \"$branch\" && git push origin -u \"$branch\"; }; f"
+
+[http]
+	# WARNING: enable this only if you don't want to configure your own company's SSL certificates on your machine
+	sslVerify = false
+	# proxy = http://localhost:3128
+
+# Force git to connect to github in HTTPS instead of the git protocol (to avoid proxy/firewall issues)
+[url "https://github.com/"]
+	# CLI config: git config --global url."https://github.com/".insteadOf git://github.com/
+        insteadOf = git://github.com/
