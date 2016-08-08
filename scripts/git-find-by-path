@@ -1,0 +1,10 @@
+#!/bin/bash
+echo searching for $1 from revision $2
+
+git rev-list $2 -- . |
+while read rev; do
+	echo Checking rev: $rev
+    if git show -p $rev | grep "$1" >/dev/null; then
+        echo "FOUND: $rev"
+    fi
+done
