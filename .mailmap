@@ -1,0 +1,16 @@
+# Mailmap
+# @see http://git-scm.com/docs/git-shortlog
+# Supported by Stash 2.5+
+# See https://confluence.atlassian.com/display/STASH/Git+resources#Gitresources-mailmap
+#
+# Here's how to get the list of all git authors: git log --all --format='%aN <%aE>' | sort -u
+#
+# Syntax samples:
+#
+# Fix Name <commit@email.xx>
+#
+# <Fix@email.xx> <commit@email.xx> # replace only the email part of a commit
+#
+# Fix Name <Fix@email.xx> <commit@email.xx> # replace both the name and the email of a commit matching the specified commit email address
+#
+# Fix Name <Fix@email.xx> Commit Name <commit@email.xx> # replace both name and email from a commit matching the specified name and email
